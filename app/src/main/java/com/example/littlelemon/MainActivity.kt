@@ -58,7 +58,7 @@ fun MainComponent() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Color(0XFF495E57))
     ) {
         Text(
