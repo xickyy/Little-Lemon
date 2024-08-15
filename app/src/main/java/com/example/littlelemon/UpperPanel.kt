@@ -33,34 +33,29 @@ import androidx.compose.ui.unit.sp
 fun UpperPanel() {
     val context = LocalContext.current
     Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0XFF495E57))
+            .background(Color(0xFF495E57))
+            .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp)
     ) {
         Text(
             text = "Little Lemon",
-            fontSize = 32.sp,
-            color = Color(0xFFF4CE14),
-            modifier = Modifier.padding(start = 20.dp, top = 20.dp)
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFFF4CE14)
         )
         Text(
-            text = stringResource(id = R.string.chicago),
+            text = stringResource(id = R.string.location),
             fontSize = 24.sp,
-            color = Color(0xFFFFFFFF),
-            modifier = Modifier.padding(start = 20.dp)
+            color = Color(0xFFEDEFEE)
         )
 
 
         Row (
-            Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
-            horizontalArrangement = Arrangement.Start
+            modifier = Modifier
+                .padding(top = 18.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.descriptionone),
+                text = stringResource(id = R.string.description),
                 color = Color(0xFFEDEFEE),
                 fontSize = 18.sp,
                 modifier = Modifier
@@ -70,9 +65,7 @@ fun UpperPanel() {
             Image(
                 painter = painterResource(id = R.drawable.food),
                 contentDescription = "Upper Panel Image",
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .height(150.dp)
+                modifier = Modifier.clip(RoundedCornerShape(20.dp))
 
 
             )
@@ -84,8 +77,7 @@ fun UpperPanel() {
                       Toast.makeText(context, "Order Successful!", Toast.LENGTH_SHORT).show()
             },
             shape = RoundedCornerShape(20.dp),
-            modifier = Modifier.padding(horizontal = 20.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFF4CE14))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4CE14))
         ) {
             Text(
                 text = stringResource(id = R.string.order),
