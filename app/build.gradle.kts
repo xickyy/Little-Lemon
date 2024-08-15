@@ -66,4 +66,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation ("androidx.compose.ui:ui:1.6.8")  // or the latest version
+    implementation ("androidx.compose.material:material:1.6.8")  // or the latest version
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.6.8")
 }

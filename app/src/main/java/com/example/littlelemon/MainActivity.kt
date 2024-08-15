@@ -40,14 +40,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            UpperPanel()
-
+            Container()
         }
     }
 }
 
 
-
+@Composable
+fun Container() {
+    Column {
+        UpperPanel()
+        LowerPanel()
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
