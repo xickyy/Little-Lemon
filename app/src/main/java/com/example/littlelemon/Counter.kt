@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -44,12 +45,22 @@ fun Counter() {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(onClick = { count++ }) {
-                    
-                }
-                Text(text = count.toString(), Modifier.size(42.dp), fontSize = 32.sp)
                 TextButton(onClick = { count-- }) {
-
+                    Text(
+                        text = "-",
+                        fontSize = 40.sp
+                    )
+                }
+                Text(
+                    text = count.toString(),
+                    Modifier.size(42.dp).padding(start = 10.dp),
+                    fontSize = 32.sp
+                )
+                TextButton(onClick = { count++ }) {
+                    Text(
+                        text = "+",
+                        fontSize = 28.sp
+                    )
                 }
             }
             Button(onClick = { /*TODO*/ }) {
