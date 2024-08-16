@@ -51,6 +51,7 @@ fun Container() {
     Column {
         UpperPanel()
         LowerPanel()
+        Counter()
     }
 }
 
