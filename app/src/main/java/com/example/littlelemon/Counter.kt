@@ -24,10 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Counter() {
-    var count by rememberSaveable() {
-        mutableIntStateOf(0)
-    }
+fun Counter(count: Int, onIncrement: () -> Unit, onDecrement: () -> Unit) {
+
     Card(elevation = CardDefaults.cardElevation(32.dp)) {
         Column(
             modifier = Modifier
@@ -46,7 +44,7 @@ fun Counter() {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(onClick = { count-- }) {
+                TextButton(onClick = { onDecrement() }) {
                     Text(
                         text = "-",
                         fontSize = 40.sp
@@ -59,7 +57,7 @@ fun Counter() {
                         .padding(start = 10.dp),
                     fontSize = 32.sp
                 )
-                TextButton(onClick = { count++ }) {
+                TextButton(onClick = { onIncrement() }) {
                     Text(
                         text = "+",
                         fontSize = 28.sp
