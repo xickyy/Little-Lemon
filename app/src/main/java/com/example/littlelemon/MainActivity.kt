@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -52,13 +54,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Container() {
-    Column {
-        var count by rememberSaveable() {
-            mutableIntStateOf(0)
+    Scaffold(
+        topBar = {
+            TopAppBar()
         }
-        UpperPanel()
-        LowerPanel()
-        Counter(count, {count++}, {count--})
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            var count by rememberSaveable() {
+                mutableIntStateOf(0)
+            }
+            UpperPanel()
+            LowerPanel()
+            Counter(count, {count++}, {count--})
+        }
     }
 }
 
