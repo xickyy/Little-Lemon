@@ -60,6 +60,7 @@ fun Container() {
     val scope = rememberCoroutineScope()
     Scaffold(
         scaffoldState = scaffoldState,
+        drawerContent = { DrawerPanel(scaffoldState = scaffoldState, scope = scope )}
         topBar = {
             TopAppBar(scaffoldState = scaffoldState, scope = scope)
         }
