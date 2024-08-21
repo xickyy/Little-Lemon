@@ -21,8 +21,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -48,6 +46,24 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import com.example.littlelemon.ui.theme.LittleLemonTheme
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
 
 
 
@@ -65,24 +81,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Container() {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
 
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerPanel(scope)
-        }
-    ) {
         Scaffold(
-            snackbarHost = { SnackbarHost(snackbarHostState) },
+            scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar(
                     title = { Text("Top App Bar") },
-                    colors = TopAppBarDefaults.smallTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
                 )
             }
         ) { innerPadding ->
@@ -98,7 +103,7 @@ fun Container() {
             }
         }
     }
-}
+
 
 @Preview(showBackground = true)
 @Composable
