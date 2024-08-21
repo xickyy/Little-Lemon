@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.SnackbarHost
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -39,6 +40,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
+import com.example.littlelemon.ui.theme.LittleLemonTheme
 
 
 
@@ -56,24 +65,37 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Container() {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    Scaffold(
-        scaffoldState = scaffoldState,
-        drawerContent = { DrawerPanel(scaffoldState = scaffoldState, scope = scope )}
-        topBar = {
-            TopAppBar(scaffoldState = scaffoldState, scope = scope)
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DrawerPanel(scope)
         }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            var count by rememberSaveable() {
-                mutableIntStateOf(0)
+    ) {
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            topBar = {
+                TopAppBar(
+                    title = { Text("Top App Bar") },
+                    colors = TopAppBarDefaults.smallTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                )
             }
-            UpperPanel()
-            LowerPanel()
-            Counter(count, {count++}, {count--})
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+            ) {
+                var count by rememberSaveable { mutableIntStateOf(0) }
+                UpperPanel()
+                LowerPanel()
+                Counter(count, { count++ }, { count-- })
+            }
         }
     }
 }
