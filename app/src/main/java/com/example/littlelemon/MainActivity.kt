@@ -86,9 +86,7 @@ fun Container() {
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
-                TopAppBar(
-                    title = { Text("Top App Bar") },
-                )
+                TopAppBar()
             }
         ) { innerPadding ->
             Column(
