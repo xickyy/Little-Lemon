@@ -95,22 +95,26 @@ fun Container() {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
 
-        Scaffold(
-            scaffoldState = scaffoldState,
-            topBar = {
-                TopAppBar(scaffoldState)
-            },
-            drawerContent = {
-                // Content of the drawer goes here
-                androidx.compose.material.IconButton(onClick = { scope.launch { scaffoldState.drawerState.close() } }) {
-                    Image(
-                        painter = painterResource(id = R.drawable.hamburgericon),
-                        contentDescription = "Menu Icon",
-                        modifier = Modifier
-                            .size(24.dp)
-                    )
-                }
-                Text("Drawer Content")
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(scaffoldState)
+                 },
+        drawerContent = {
+            // Content of the drawer goes here
+            androidx.compose.material.IconButton(onClick = { scope.launch { scaffoldState.drawerState.close() } }) {
+                Image(
+                    painter = painterResource(id = R.drawable.hamburgericon),
+                    contentDescription = "Menu Icon",
+                    modifier = Modifier
+                        .size(24.dp)
+                )
+            }
+                Text(
+                    text = "Drawer Content",
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
             }
         ) { innerPadding ->
             Column(
