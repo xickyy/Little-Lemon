@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
@@ -74,7 +75,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
-
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -92,6 +93,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Container() {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
+    val scope = rememberCoroutineScope()
 
         Scaffold(
             scaffoldState = scaffoldState,
@@ -100,6 +102,14 @@ fun Container() {
             },
             drawerContent = {
                 // Content of the drawer goes here
+                androidx.compose.material.IconButton(onClick = { scope.launch { scaffoldState.drawerState.close() } }) {
+                    Image(
+                        painter = painterResource(id = R.drawable.hamburgericon),
+                        contentDescription = "Menu Icon",
+                        modifier = Modifier
+                            .size(24.dp)
+                    )
+                }
                 Text("Drawer Content")
             }
         ) { innerPadding ->
