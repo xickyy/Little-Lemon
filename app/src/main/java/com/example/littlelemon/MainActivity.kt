@@ -64,6 +64,16 @@ import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 
 
 
@@ -81,12 +91,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Container() {
-    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
 
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
-                TopAppBar()
+                TopAppBar(scaffoldState)
+            },
+            drawerContent = {
+                // Content of the drawer goes here
+                Text("Drawer Content")
             }
         ) { innerPadding ->
             Column(
