@@ -24,6 +24,9 @@ import androidx.compose.material.DrawerValue
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Scaffold
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 
 
@@ -33,11 +36,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Container()
+            //Container()
+            MyNavigation()
         }
     }
 }
 
+@Composable
+fun MyNavigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Home.route ) {
+        composable(Home.route) {
+            NewScreen(navController)
+        }
+        composable(MenuList.route) {
+            MenuList()
+        }
+    }
+}
 
 @Composable
 fun Container() {

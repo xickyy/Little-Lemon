@@ -11,9 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 
 @Composable
-fun NewScreen() {
+fun NewScreen(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -24,7 +25,9 @@ fun NewScreen() {
             fontSize = 32.sp
         )
         Button(
-            onClick = {},
+            onClick = {
+                      navController.navigate(MenuList.route)
+            },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFF4CE14)
             )
