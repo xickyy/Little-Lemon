@@ -44,7 +44,7 @@ fun Counter(count: Int, onIncrement: () -> Unit, onDecrement: () -> Unit) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(onClick = { onDecrement() }) {
+                TextButton(onClick = { if(count > 0) onDecrement() }) {
                     Text(
                         text = "-",
                         fontSize = 40.sp
