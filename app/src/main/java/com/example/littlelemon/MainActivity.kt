@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,11 @@ import androidx.compose.material3.*
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
+import androidx.compose.runtime.mutableStateOf
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -37,7 +42,25 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             //Container()
-            MyNavigation()
+            //MyNavigation()
+            MyApp()
+        }
+    }
+}
+
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    Scaffold(bottomBar = { MyBottomNav(navController = navController)}) {
+        Box(modifier = Modifier.padding(it)) {
+            NavHost(navController = navController, startDestination = Home.route ) {
+                composable(Home.route) {
+                    MenuList()
+                }
+                composable(Settings.route) {
+                    SettingsScreen()
+                }
+            }
         }
     }
 }
@@ -51,6 +74,32 @@ fun MyNavigation() {
         }
         composable(MenuList.route) {
             MenuList()
+        }
+    }
+}
+
+@Composable
+fun MyBottomNav(navController: NavController) {
+    val destinationList = listOf<Destinations>(
+        Home,
+        Settings
+    )
+    val selectedIndex = rememberSaveable {
+        mutableIntStateOf(0)
+    }
+    BottomNavigation() {
+        destinationList.forEachIndexed{index, destination ->
+            BottomNavigationItem(
+                label = {Text(text = destination.title)},
+                selected = index == selectedIndex.value,
+                onClick = {
+                    selectedIndex.value = index
+                    navController.navigate(destinationList[index].route) {
+                        popUpTo(Home.route)
+                        launchSingleTop = true
+                    }
+                          },
+                icon = {Icon(imageVector = destination.icon, contentDescription = destination.title) })
         }
     }
 }
