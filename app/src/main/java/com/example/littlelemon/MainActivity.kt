@@ -107,7 +107,7 @@ fun MyBottomNav(navController: NavController) {
         destinationList.forEachIndexed{index, destination ->
             BottomNavigationItem(
                 modifier = Modifier.background(Color(0xFF495E57)),
-                label = {Text(text = destination.title)},
+                label = {Text(text = destination.title, color = Color(0xFFF4CE14))},
                 selected = index == selectedIndex.value,
                 onClick = {
                     selectedIndex.value = index
@@ -116,7 +116,13 @@ fun MyBottomNav(navController: NavController) {
                         launchSingleTop = true
                     }
                           },
-                icon = {Icon(imageVector = destination.icon, contentDescription = destination.title) })
+                icon = {Icon(
+                    imageVector = destination.icon,
+                    contentDescription = destination.title,
+                    tint = Color(0xFFF4CE14)
+                    )
+                }
+            )
         }
     }
 }
