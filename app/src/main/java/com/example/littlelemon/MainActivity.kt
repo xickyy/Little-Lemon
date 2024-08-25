@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +44,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Container()
-            //MyNavigation()
             MyApp()
         }
     }
@@ -76,8 +77,11 @@ fun MyApp() {
             )
         }
     ) {
-        Box(modifier = Modifier.padding(it)) {
-            NavHost(navController = navController, startDestination = Home.route ) {
+        Box(
+            modifier = Modifier
+                .padding(it)
+        ) {
+            NavHost(navController = navController, startDestination = Home.route) {
                 composable(Home.route) {
                     Container()
                 }
@@ -89,18 +93,6 @@ fun MyApp() {
     }
 }
 
-@Composable
-fun MyNavigation() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Home.route ) {
-        composable(Home.route) {
-            NewScreen(navController)
-        }
-        composable(MenuList.route) {
-            MenuList()
-        }
-    }
-}
 
 @Composable
 fun MyBottomNav(navController: NavController) {
@@ -114,6 +106,7 @@ fun MyBottomNav(navController: NavController) {
     BottomNavigation() {
         destinationList.forEachIndexed{index, destination ->
             BottomNavigationItem(
+                modifier = Modifier.background(Color(0xFF495E57)),
                 label = {Text(text = destination.title)},
                 selected = index == selectedIndex.value,
                 onClick = {
@@ -141,11 +134,3 @@ fun Container() {
                 Counter(count, { count++ }, { count-- })
             }
         }
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LittleLemonTheme {
-        UpperPanel()
-    }
-}
