@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //Container()
+            Container()
             //MyNavigation()
             MyApp()
         }
@@ -51,11 +51,35 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     val navController = rememberNavController()
-    Scaffold(bottomBar = { MyBottomNav(navController = navController)}) {
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        bottomBar = { MyBottomNav(navController = navController)},
+        scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(scaffoldState)
+        },
+        drawerContent = {
+            // Content of the drawer goes here
+            androidx.compose.material.IconButton(onClick = { scope.launch { scaffoldState.drawerState.close() } }) {
+                Image(
+                    painter = painterResource(id = R.drawable.hamburgericon),
+                    contentDescription = "Menu Icon",
+                    modifier = Modifier
+                        .size(24.dp)
+                )
+            }
+            Text(
+                text = "Drawer Content",
+                modifier = Modifier
+                    .padding(10.dp)
+            )
+        }
+    ) {
         Box(modifier = Modifier.padding(it)) {
             NavHost(navController = navController, startDestination = Home.route ) {
                 composable(Home.route) {
-                    MenuList()
+                    Container()
                 }
                 composable(Settings.route) {
                     SettingsScreen()
@@ -106,34 +130,9 @@ fun MyBottomNav(navController: NavController) {
 
 @Composable
 fun Container() {
-    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
-    val scope = rememberCoroutineScope()
-
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            TopAppBar(scaffoldState)
-                 },
-        drawerContent = {
-            // Content of the drawer goes here
-            androidx.compose.material.IconButton(onClick = { scope.launch { scaffoldState.drawerState.close() } }) {
-                Image(
-                    painter = painterResource(id = R.drawable.hamburgericon),
-                    contentDescription = "Menu Icon",
-                    modifier = Modifier
-                        .size(24.dp)
-                )
-            }
-                Text(
-                    text = "Drawer Content",
-                    modifier = Modifier
-                        .padding(10.dp)
-                )
-            }
-        ) { innerPadding ->
             Column(
                 modifier = Modifier
-                    .padding(innerPadding)
+                    .padding()
                     .fillMaxSize()
             ) {
                 var count by rememberSaveable { mutableIntStateOf(0) }
@@ -142,7 +141,6 @@ fun Container() {
                 Counter(count, { count++ }, { count-- })
             }
         }
-    }
 
 @Preview(showBackground = true)
 @Composable
