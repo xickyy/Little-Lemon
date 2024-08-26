@@ -136,6 +136,7 @@ fun Container() {
             ) {
                 var count by rememberSaveable { mutableIntStateOf(0) }
                 UpperPanel()
+                CategoriesList()
                 LowerPanel()
                 Counter(count, { count++ }, { count-- })
             }
