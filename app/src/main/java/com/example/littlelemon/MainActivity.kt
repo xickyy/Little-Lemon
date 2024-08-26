@@ -138,6 +138,6 @@ fun Container() {
                 UpperPanel()
                 CategoriesList()
                 LowerPanel()
-                Counter(count, { count++ }, { count-- })
+                //Counter(count, { count++ }, { count-- })
             }
         }

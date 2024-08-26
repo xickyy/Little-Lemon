@@ -1,10 +1,12 @@
 package com.example.littlelemon
 
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -25,22 +27,26 @@ fun Categories(category: String) {
         modifier = Modifier.padding(5.dp)
     ) {
         Text(
-            text = category
+            text = category,
+            color = Color.Black
         )
     }
 }
 
 val List = listOf<String> (
+    "Breakfast",
     "Lunch",
+    "Dinner",
     "Dessert",
-    "Dinner"
+    "Drinks"
 )
 
 @Composable
 fun CategoriesList() {
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         List.forEach {
