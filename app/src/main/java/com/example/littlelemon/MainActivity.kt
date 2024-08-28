@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Container()
             MyApp()
         }
     }
