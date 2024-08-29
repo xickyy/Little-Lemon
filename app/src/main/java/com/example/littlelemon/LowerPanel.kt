@@ -34,6 +34,7 @@ fun WeeklySpecialCard(){
     ) {
         Text(
             text = "Weekly Special",
+            color = LittleLemonColor.charcoal,
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
@@ -52,19 +53,20 @@ fun MenuDish() {
         ) {
             Column {
                 Text(text = "Greek Salad",
+                    color = LittleLemonColor.charcoal,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(text = "The famous greek salad of " +
                         "crispy lettuce, peppers, olives, " +
                         "our Chicago ...",
-                    color = Color.Gray,
+                    color = LittleLemonColor.green,
                     modifier = Modifier
                         .padding(top = 5.dp, bottom = 5.dp)
                         .fillMaxWidth(.75f)
                 )
                 Text(text = "$12.99",
-                    color = Color.Gray,
+                    color = LittleLemonColor.green,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -74,7 +76,7 @@ fun MenuDish() {
         }
     }
     Divider(modifier = Modifier.padding(start = 8.dp, end = 8.dp),
-        color = Color.LightGray,
+        color = LittleLemonColor.yellow,
         thickness = 1.dp
     )
 }

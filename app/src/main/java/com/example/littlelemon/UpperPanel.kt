@@ -34,19 +34,19 @@ fun UpperPanel() {
     val context = LocalContext.current
     Column(
         modifier = Modifier
-            .background(Color(0xFF495E57))
+            .background(LittleLemonColor.green)
             .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp)
     ) {
         Text(
             text = "Little Lemon",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFFF4CE14)
+            color = LittleLemonColor.yellow
         )
         Text(
             text = stringResource(id = R.string.location),
             fontSize = 24.sp,
-            color = Color(0xFFEDEFEE)
+            color = LittleLemonColor.cloud
         )
 
 
@@ -56,7 +56,7 @@ fun UpperPanel() {
         ) {
             Text(
                 text = stringResource(id = R.string.description),
-                color = Color(0xFFEDEFEE),
+                color = LittleLemonColor.cloud,
                 fontSize = 18.sp,
                 modifier = Modifier
                     .padding(bottom = 28.dp)
@@ -77,7 +77,7 @@ fun UpperPanel() {
                       Toast.makeText(context, "Order Successful!", Toast.LENGTH_SHORT).show()
             },
             shape = RoundedCornerShape(20.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4CE14))
+            colors = ButtonDefaults.buttonColors(containerColor = LittleLemonColor.yellow)
         ) {
             Text(
                 text = stringResource(id = R.string.order),
