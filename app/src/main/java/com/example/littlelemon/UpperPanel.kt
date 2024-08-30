@@ -46,6 +46,7 @@ fun UpperPanel() {
         Text(
             text = stringResource(id = R.string.location),
             fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
             color = LittleLemonColor.cloud
         )
 
